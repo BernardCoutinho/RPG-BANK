@@ -1,15 +1,37 @@
+
+
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="justify-content-center">
+      <h1 class="m-3">RPG BANK</h1>
+      <div>
+        <h2>Bem vindo ao Cadeira Central!</h2>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-6 col-sm-12 mt-3">
+            <button class="btn btn-primary">
+              Calculadora
+            </button>
+          </div>
+          <div class="col-6 col-sm-12 mt-3">
+            <button class="btn btn-secondary">
+              Conta
+            </button>
+          </div>
+        </div>
+      </div>
+      <CalculadoraComponent />
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CalculadoraComponent from './components/CalculadoraComponent.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CalculadoraComponent
+
   }
 }
 </script>
@@ -24,3 +46,4 @@ export default {
   margin-top: 60px;
 }
 </style>
+
