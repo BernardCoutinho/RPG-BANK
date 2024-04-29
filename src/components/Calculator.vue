@@ -2,196 +2,227 @@
   <div>
     <h1 class="text-center">Calculator</h1>
 
-    <div class="row">
-      <div class="col-4"><h1>Actions:</h1></div>
-      <div class="col-8 justify-content-end d-flex">
+    <div class="row d-flex">
+      <div class="col-12 col-sm-6">
+        <span class="visually-hidden">Actions:</span>
+      </div>
+      <div class="col-12 col-sm-12 justify-content-end d-flex">
         <button v-on:click="sum()" class="btn btn-lg btn-dark m-3">
-          <font-awesome-icon icon="fa-solid fa-plus" class="m-1" />
+          <font-awesome-icon
+            icon="fa-solid fa-plus"
+            class="m-1 bg-btn-calculator-action-icon"
+          />
         </button>
         <button v-on:click="subtraction()" class="btn btn-lg btn-dark m-3">
-          <font-awesome-icon icon="fa-solid fa-minus" class="m-1" />
+          <font-awesome-icon
+            icon="fa-solid fa-minus"
+            class="m-1 bg-btn-calculator-action-icon"
+          />
         </button>
 
         <div class="input-group m-3">
-            <button class="btn btn-dark" type="button">
-                <font-awesome-icon icon="fa-solid fa-divide" class="m-1" />
-            </button>
-            <input type="number" class="form-control" placeholder="By: ">
+          <button v-on:click="divide()" class="btn btn-dark" type="button">
+            <font-awesome-icon
+              icon="fa-solid fa-divide "
+              class="m-1 bg-btn-calculator-action-icon"
+            />
+          </button>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="By: "
+            v-model="divideValue"
+            name="baseGold"
+            id="baseGold"
+          />
         </div>
 
         <div class="input-group m-3">
-            <button class="btn btn-dark" type="button">
-                <font-awesome-icon icon="fa-solid fa-xmark" class="m-1" />
-            </button>
-            <input type="number" class="form-control" placeholder="By: ">
-        </div>
-
-      </div>
-
-      <div class="col align-content-center m-3">
-        <h2>Result:</h2>
-        <div class="align-content-left">
-          <form id="baseCalcForm">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text bg-gold" id="vBaseGold">
-                  <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
-                  Gold
-                </span>
-              </div>
-              <input
-                v-model="baseGold"
-                type="number"
-                name="baseGold"
-                id="baseGold"
-                class="form-control"
-                placeholder="0"
-                aria-label="vBaseGold"
-                aria-describedby="vBaseGold"
-                readonly
-              />
-            </div>
-
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text bg-silver" id="vBaseSilver">
-                  <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
-                  Silver
-                </span>
-              </div>
-              <input
-                v-model="baseSilver"
-                type="number"
-                name="baseGold"
-                id="baseSilver"
-                class="form-control"
-                placeholder="0"
-                aria-label="vBaseSilver"
-                aria-describedby="vBaseSilver"
-                readonly
-              />
-            </div>
-
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text bg-tin" id="vBaseTin">
-                  <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
-                  Tin
-                </span>
-              </div>
-              <input
-                v-model="baseTin"
-                type="number"
-                name="baseTin"
-                id="baseTin"
-                class="form-control"
-                placeholder="0"
-                aria-label="vBaseTin"
-                aria-describedby="vBaseTin"
-                readonly
-              />
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text bg-copper" id="vBaseCopper">
-                  <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
-                  Copper
-                </span>
-              </div>
-              <input
-                v-model="baseCopper"
-                type="number"
-                name="baseCopper"
-                id="baseCopper"
-                class="form-control"
-                placeholder="0"
-                aria-label="vBaseCopper"
-                aria-describedby="vBaseCopper"
-                readonly
-              />
-            </div>
-          </form>
+          <button v-on:click="multiply()" class="btn btn-dark" type="button">
+            <font-awesome-icon
+              icon="fa-solid fa-xmark"
+              class="m-1 bg-btn-calculator-action-icon"
+            />
+          </button>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="By: "
+            v-model="multiplyValue"
+            name="baseGold"
+            id="baseGold"
+          />
         </div>
       </div>
-      <div class="col align-content-center m-3">
-        <h2>Inform:</h2>
-        <div class="align-content-left">
-          <form id="baseInsertForm">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text bg-gold" id="vInsertedGold">
-                  <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
-                  Gold
-                </span>
-              </div>
-              <input
-                v-model="insertedGold"
-                type="number"
-                name="insertedGold"
-                id="insertedGold"
-                class="form-control"
-                placeholder="0"
-                aria-label="vInsertedGold"
-                aria-describedby="vInsertedGold"
-              />
-            </div>
 
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text bg-silver" id="vInsertedSilver">
-                  <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
-                  Silver
-                </span>
+      <div class="col-12 col-sm-6 align-content-center">
+        <div class="m-3">
+          <h2>Inform:</h2>
+          <div class="align-content-left m-3">
+            <form id="baseInsertForm">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-gold" id="vInsertedGold">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Gold
+                  </span>
+                </div>
+                <input
+                  v-model="insertedGold"
+                  type="number"
+                  name="insertedGold"
+                  id="insertedGold"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vInsertedGold"
+                  aria-describedby="vInsertedGold"
+                />
               </div>
-              <input
-                v-model="insertedSilver"
-                type="number"
-                name="insertedGold"
-                id="insertedSilver"
-                class="form-control"
-                placeholder="0"
-                aria-label="vInsertedSilver"
-                aria-describedby="vInsertedSilver"
-              />
-            </div>
 
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text bg-tin" id="vInsertedTin">
-                  <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
-                  Tin
-                </span>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-silver" id="vInsertedSilver">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Silver
+                  </span>
+                </div>
+                <input
+                  v-model="insertedSilver"
+                  type="number"
+                  name="insertedGold"
+                  id="insertedSilver"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vInsertedSilver"
+                  aria-describedby="vInsertedSilver"
+                />
               </div>
-              <input
-                v-model="insertedTin"
-                type="number"
-                name="insertedTin"
-                id="insertedTin"
-                class="form-control"
-                placeholder="0"
-                aria-label="vInsertedTin"
-                aria-describedby="vInsertedTin"
-              />
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text bg-copper" id="vInsertedCopper">
-                  <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
-                  Copper
-                </span>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-tin" id="vInsertedTin">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Tin
+                  </span>
+                </div>
+                <input
+                  v-model="insertedTin"
+                  type="number"
+                  name="insertedTin"
+                  id="insertedTin"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vInsertedTin"
+                  aria-describedby="vInsertedTin"
+                />
               </div>
-              <input
-                v-model="insertedCopper"
-                type="number"
-                name="insertedCopper"
-                id="insertedCopper"
-                class="form-control"
-                placeholder="0"
-                aria-label="vInsertedCopper"
-                aria-describedby="vInsertedCopper"
-              />
-            </div>
-          </form>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-copper" id="vInsertedCopper">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Copper
+                  </span>
+                </div>
+                <input
+                  v-model="insertedCopper"
+                  type="number"
+                  name="insertedCopper"
+                  id="insertedCopper"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vInsertedCopper"
+                  aria-describedby="vInsertedCopper"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 align-content-center">
+        <div class="m-3">
+          <h2>Result:</h2>
+          <div class="align-content-left">
+            <form id="baseCalcForm">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-gold" id="vBaseGold">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Gold
+                  </span>
+                </div>
+                <input
+                  v-model="baseGold"
+                  type="number"
+                  name="baseGold"
+                  id="baseGold"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vBaseGold"
+                  aria-describedby="vBaseGold"
+                  readonly
+                />
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-silver" id="vBaseSilver">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Silver
+                  </span>
+                </div>
+                <input
+                  v-model="baseSilver"
+                  type="number"
+                  name="baseGold"
+                  id="baseSilver"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vBaseSilver"
+                  aria-describedby="vBaseSilver"
+                  readonly
+                />
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-tin" id="vBaseTin">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Tin
+                  </span>
+                </div>
+                <input
+                  v-model="baseTin"
+                  type="number"
+                  name="baseTin"
+                  id="baseTin"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vBaseTin"
+                  aria-describedby="vBaseTin"
+                  readonly
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-copper" id="vBaseCopper">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Copper
+                  </span>
+                </div>
+                <input
+                  v-model="baseCopper"
+                  type="number"
+                  name="baseCopper"
+                  id="baseCopper"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vBaseCopper"
+                  aria-describedby="vBaseCopper"
+                  readonly
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -214,6 +245,7 @@ export default {
       insertedTin: 0,
       insertedCopper: 0,
       multiplyValue: 0,
+      divideValue: 0,
     };
   },
   components: {
@@ -264,6 +296,34 @@ export default {
       this.setBaseValues(maxValueCoinsObject);
       this.resetInsertedValues();
     },
+    divide() {
+      let totalBase = this.transformToCopper(
+        this.baseGold,
+        this.baseSilver,
+        this.baseTin,
+        this.baseCopper
+      );
+
+      let total = totalBase / this.divideValue;
+
+      let maxValueCoinsObject = this.transformCopperToMaxValuesCoins(total);
+      this.setBaseValues(maxValueCoinsObject);
+      this.resetInsertedValues();
+    },
+    multiply() {
+      let totalBase = this.transformToCopper(
+        this.baseGold,
+        this.baseSilver,
+        this.baseTin,
+        this.baseCopper
+      );
+
+      let total = totalBase * this.multiplyValue;
+
+      let maxValueCoinsObject = this.transformCopperToMaxValuesCoins(total);
+      this.setBaseValues(maxValueCoinsObject);
+      this.resetInsertedValues();
+    },
 
     setBaseValues(coinsObj) {
       this.baseGold = coinsObj.gold;
@@ -303,6 +363,8 @@ export default {
       this.insertedSilver = 0;
       this.insertedTin = 0;
       this.insertedCopper = 0;
+      this.divideValue = 0;
+      this.multiplyValue = 0;
     },
   },
 };
@@ -332,5 +394,12 @@ export default {
 
 .bg-copper {
   background-color: rgba(252, 121, 85, 0.885);
+}
+
+.bg-btn-calculator-action-icon {
+  color: #fcba03;
+}
+.bg-btn-calculator-action-icon:hover {
+  color: #fff;
 }
 </style>
