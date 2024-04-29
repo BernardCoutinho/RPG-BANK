@@ -97,16 +97,16 @@
             },
 
             transformToCopper(gold = 0, silver = 0, tin = 0, copper = 0){
-                return gold*(99**3) + 
-                silver*(99**2) + 
-                tin*99 + 
+                return gold*(100**3) + 
+                silver*(100**2) + 
+                tin*100 + 
                 copper
             },
 
             transformCopperToMaxValuesCoins(copper){
-                const tinMultiplier = 99;
-                const silverMultiplier = tinMultiplier * 99;
-                const goldMultiplier = silverMultiplier * 99;
+                const tinMultiplier = 100;
+                const silverMultiplier = tinMultiplier * 100;
+                const goldMultiplier = silverMultiplier * 100;
 
                 let gold = Math.floor(copper / goldMultiplier);
                 if(gold > 0)
