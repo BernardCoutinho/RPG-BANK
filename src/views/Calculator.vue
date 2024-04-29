@@ -62,6 +62,24 @@
             <form id="baseInsertForm">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
+                  <span class="input-group-text bg-electrum" id="vInsertedElectrum">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Electrum
+                  </span>
+                </div>
+                <input
+                  v-model="insertedElectrum"
+                  type="number"
+                  name="insertedElectrum"
+                  id="insertedElectrum"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vInsertedElectrum"
+                  aria-describedby="vInsertedElectrum"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
                   <span class="input-group-text bg-platinum" id="vInsertedPlatinum">
                     <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
                     Platinum
@@ -162,6 +180,43 @@
           <h2>Result:</h2>
           <div class="align-content-left">
             <form id="baseCalcForm">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-electrum" id="vBaseElectrum">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Electrum
+                  </span>
+                </div>
+                <input
+                  v-model="baseElectrum"
+                  type="number"
+                  name="baseElectrum"
+                  id="baseElectrum"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vBaseElectrum"
+                  aria-describedby="vBaseElectrum"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-platinum" id="vBasePlatinum">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Platinum
+                  </span>
+                </div>
+                <input
+                  v-model="basePlatinum"
+                  type="number"
+                  name="basePlatinum"
+                  id="basePlatinum"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vBasePlatinum"
+                  aria-describedby="vBasePlatinum"
+                />
+              </div>
+
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text bg-gold" id="vBaseGold">
