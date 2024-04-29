@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../components/Home.vue'
+import Home from '../views/Home.vue'
+import CalculatorComponent from '../views/Calculator.vue'
 
 const routes = [
   {
@@ -10,7 +11,7 @@ const routes = [
   {
     path: '/calculator',
     name: 'Calculator',
-    component: () => import('../components/Calculator')
+    component: CalculatorComponent
   }
 ]
 
