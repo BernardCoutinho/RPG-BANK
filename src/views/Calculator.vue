@@ -32,8 +32,8 @@
             class="form-control"
             placeholder="By: "
             v-model="divideValue"
-            name="baseGold"
-            id="baseGold"
+            name="divideValue"
+            id="divideValue"
           />
         </div>
 
@@ -49,8 +49,8 @@
             class="form-control"
             placeholder="By: "
             v-model="multiplyValue"
-            name="baseGold"
-            id="baseGold"
+            name="multiplyValue"
+            id="multiplyValue"
           />
         </div>
       </div>
@@ -60,6 +60,25 @@
           <h2>Inform:</h2>
           <div class="align-content-left m-3">
             <form id="baseInsertForm">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-platinum" id="vInsertedPlatinum">
+                    <font-awesome-icon icon="fa-solid fa-coins" class="m-1" />
+                    Platinum
+                  </span>
+                </div>
+                <input
+                  v-model="insertedPlatinum"
+                  type="number"
+                  name="insertedPlatinum"
+                  id="insertedPlatinum"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="vInsertedPlatinum"
+                  aria-describedby="vInsertedPlatinum"
+                />
+              </div>
+
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text bg-gold" id="vInsertedGold">
@@ -236,6 +255,8 @@ export default {
   name: "CalculatorComponent",
   data() {
     return {
+      baseElectrum: 0,
+      basePlatinum: 0,
       baseGold: 0,
       baseSilver: 0,
       baseTin: 0,
@@ -246,6 +267,11 @@ export default {
       insertedCopper: 0,
       multiplyValue: 0,
       divideValue: 0,
+      tinMultiplier: 100,
+      silverMultiplier: tinMultiplier * 100,
+      goldMultiplier: silverMultiplier * 100,
+      platinumMultiplier: goldMultiplier * 100,
+      electrumMultiplier: platinumMultiplier * 100,
     };
   },
   components: {
@@ -325,38 +351,46 @@ export default {
       this.resetInsertedValues();
     },
 
-    setBaseValues(coinsObj) {
-      this.baseGold = coinsObj.gold;
-      this.baseSilver = coinsObj.silver;
-      this.baseTin = coinsObj.tin;
-      this.baseCopper = coinsObj.copper;
-    },
-
-    transformToCopper(gold = 0, silver = 0, tin = 0, copper = 0) {
-      return gold * 100 ** 3 + silver * 100 ** 2 + tin * 100 + copper;
+    transformToCopper(electrum = 0, platinum = 0, gold = 0, silver = 0, tin = 0, copper = 0) {
+      return electrum * this.electrumMultiplier + 
+        platinum * this.platinumMultiplier + 
+        gold * this.goldMultiplier + 
+        silver * this.silverMultiplier + 
+        tin * this.tinMultiplier + 
+        copper;
     },
 
     transformCopperToMaxValuesCoins(copper) {
-      const tinMultiplier = 100;
-      const silverMultiplier = tinMultiplier * 100;
-      const goldMultiplier = silverMultiplier * 100;
+      let electrum = Math.floor(copper / this.electrumMultiplier)
+      if(electrum > 0) copper %= this.electrumMultiplier
 
-      let gold = Math.floor(copper / goldMultiplier);
-      if (gold > 0) copper %= goldMultiplier;
+      let platinum = Math.floor(copper / this.platinumMultiplier);
+      if(platinum > 0) cooper % this.platinumMultiplier
 
-      let silver = Math.floor(copper / silverMultiplier);
-      if (silver > 0) copper %= silverMultiplier;
+      let gold = Math.floor(copper / this.goldMultiplier);
+      if (gold > 0) copper %= this.goldMultiplier;
 
-      let tin = Math.floor(copper / tinMultiplier);
-      if (tin > 0) copper %= tinMultiplier;
+      let silver = Math.floor(copper / this.silverMultiplier);
+      if (silver > 0) copper %= this.silverMultiplier;
 
-      console.log("copper ", copper);
+      let tin = Math.floor(copper / this.tinMultiplier);
+      if (tin > 0) copper %= this.tinMultiplier;
+
+      //console.log("copper ", copper);
       return {
+        electrum: electrum,
+        platinum: platinum,
         gold: gold,
         silver: silver,
         tin: tin,
         copper: copper,
       };
+    },
+    setBaseValues(coinsObj) {
+      this.baseGold = coinsObj.gold;
+      this.baseSilver = coinsObj.silver;
+      this.baseTin = coinsObj.tin;
+      this.baseCopper = coinsObj.copper;
     },
     resetInsertedValues() {
       this.insertedGold = 0;
@@ -378,6 +412,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.bg-electrum {
+  background-color: rgb(254, 254, 140);
+}
+
+.bg-platinum {
+  background-color: rgb(224, 230, 211);
 }
 
 .bg-gold {
